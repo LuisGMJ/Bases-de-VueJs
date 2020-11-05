@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <script src="components/message.js"></script>
+    <script src="components/emit.js"></script>
+    <script src="components/child-data.js"></script>
+    <script src="components/child-methods.js"></script>
+    <script src="components/login-form.js"></script>
+    <script src="components/loops.js"></script>
+    <script src="components/conditionals.js"></script>
+    <script src="components/slots.js"></script>
+    <script src="components/watchers.js"></script>
+
+    <title>Vue 2</title>
+  </head>
+  <body>
+    <div id="app">
+      <message></message>
+      <emit @show_car_brand="showCarBrandFromEmitComp"></emit>
+      <child-data ref="childData"></child-data>
+      <child-methods ref="childMethod"></child-methods>
+      <login-form></login-form>
+      <loops></loops>
+      <conditionals></conditionals>
+      <slots>
+        <template slot="header">
+          <h3>Header del layout con Slots</h3>
+        </template>
+        <p>Contenido del slot para el cuerpo</p>
+        <template slot="footer">
+          <p>Footer del layout con Slots</p>
+        </template>
+      </slots>
+      <watchers></watchers>
+      <computed-properties-get-set></computed-properties-get-set>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        mounted() {
+          const cmpName = this.$refs.childData.componentName;
+          console.log(cmpName);
+          setTimeout(() => {
+            this.$refs.childMethod.showComponentName();
+          }, 3000);
+        },
+        methods: {
+          showCarBrandFromEmitComp(carBrand) {
+            alert(carBrand);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
