@@ -6,10 +6,10 @@ Vue.component('computed-properties-get-set', {
     },
     computed: {
         amountFormatted: {
-            get() {
+            get: function() {
                 return 10
-            }
-            set(newValue) {
+            },
+            set: function(newValue) {
 
             }
         }
