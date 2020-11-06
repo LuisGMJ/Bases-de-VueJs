@@ -6,18 +6,19 @@ Vue.component('computed-properties-get-set', {
     },
     computed: {
         amountFormatted: {
-            get: function() {
-                return 10
+            get: function () {
+                return `${this.amount}`
             },
-            set: function(newValue) {
-
+            set: function (newValue) {
+                this.amount = newValue;
             }
         }
     },
     template: `
         <div>
-        <h2>Computed properties Get y Set</h2>
-        <p>{{amountFormatted}}</p>
+            <h2>Computed properties Get y Set</h2>
+            <input v-model="amount">
+            <p>{{amountFormatted | currency_filter('$')}}</p>
         </div>
     `
 });

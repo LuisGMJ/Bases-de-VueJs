@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <script src="directives/focus.js"></script>
+    <script src="directives/change-styles.js"></script>
+
+    <script src="filters/currency-filter.js"></script>
 
     <script src="components/message.js"></script>
     <script src="components/computed-properties.js"></script>
@@ -23,52 +27,67 @@
     <script src="components/watchers.js"></script>
     <script src="components/computed-properties-get-set.js"></script>
 
-    <title>Vue 2</title>
-</head>
+    <script src="components/dynamic-components/cmp1.js"></script>
+    <script src="components/dynamic-components/cmp2.js"></script>
+    <script src="components/dynamic-components/cmp3.js"></script>
+    <script src="components/load-dynamic-components.js"></script>
+    <script src="components/mixins.js"></script>
+    <script src="components/props.js"></script>
 
-<body>
+    <script src="plugins/aboutMe.js"></script>
+
+    <title>Vue 2</title>
+  </head>
+
+  <body>
     <div id="app">
-        <message></message>
-        <computed-properties></computed-properties>
-        <methods></methods>
-        <vmodel></vmodel>
-        <vmodel-checkboxes></vmodel-checkboxes>
-        <emit @show_car_brand="showCarBrandFromEmitComp"></emit>
-        <parent-data></parent-data>
-        <child-data ref="childData"></child-data>
-        <child-methods ref="childMethod"></child-methods>
-        <login-form></login-form>
-        <loops></loops>
-        <conditionals></conditionals>
-        <slots>
-            <template slot="header">
+      <message
+        v-change-styles="{backgroundColor: 'blue', color: 'white'}"
+      ></message>
+      <computed-properties></computed-properties>
+      <methods></methods>
+      <vmodel></vmodel>
+      <vmodel-checkboxes></vmodel-checkboxes>
+      <emit @show_car_brand="showCarBrandFromEmitComp"></emit>
+      <parent-data></parent-data>
+      <child-data ref="childData"></child-data>
+      <child-methods ref="childMethod"></child-methods>
+      <login-form></login-form>
+      <loops></loops>
+      <conditionals></conditionals>
+      <slots>
+        <template slot="header">
           <h3>Header del layout con Slots</h3>
         </template>
-            <p>Contenido del slot para el cuerpo</p>
-            <template slot="footer">
+        <p>Contenido del slot para el cuerpo</p>
+        <template slot="footer">
           <p>Footer del layout con Slots</p>
         </template>
-        </slots>
-        <watchers></watchers>
-        <computed-properties-get-set></computed-properties-get-set>
+      </slots>
+      <watchers></watchers>
+      <computed-properties-get-set></computed-properties-get-set>
+      <load-dynamic-components></load-dynamic-components>
+      <mixins></mixins>
+      <props name="Luis" surname="Juarez" :age="25"></props>
     </div>
     <script>
-        new Vue({
-            el: "#app",
-            mounted() {
-                const cmpName = this.$refs.childData.componentName;
-                console.log(cmpName);
-                setTimeout(() => {
-                    this.$refs.childMethod.showComponentName();
-                }, 3000);
-            },
-            methods: {
-                showCarBrandFromEmitComp(carBrand) {
-                    alert(carBrand);
-                },
-            },
-        });
-    </script>
-</body>
+      new Vue({
+        el: "#app",
+        mounted() {
+          const cmpName = this.$refs.childData.componentName;
+          console.log(cmpName);
+          setTimeout(() => {
+            this.$refs.childMethod.showComponentName();
+          }, 3000);
 
+          console.log(this.$me("Luis", 25));
+        },
+        methods: {
+          showCarBrandFromEmitComp(carBrand) {
+            alert(carBrand);
+          },
+        },
+      });
+    </script>
+  </body>
 </html>
